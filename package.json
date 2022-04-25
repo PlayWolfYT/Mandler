@@ -37,7 +37,8 @@
   },
   "files": [
     "./dist/**/*.js",
-    "./index.js"
+    "./index.js",
+    "./typings.d.ts"
   ],
   "np": {
     "yarn": false,
