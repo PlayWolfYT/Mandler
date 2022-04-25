@@ -1,6 +1,6 @@
 import { Client } from "discord.js";
 import EventEmitter from "events";
-import { MandlerOptions, MandlerOptionsWithMongoDB } from "../typings";
+import { MandlerOptions, MandlerOptionsWithMongoDB } from "./typings";
 import { Connection } from 'mongoose';
 import mongoose from "mongoose";
 import GuildSettings, { IGuildSettings } from "./models/mongodb/GuildSettings";
