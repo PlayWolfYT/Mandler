@@ -39,7 +39,6 @@
     "./dist/**/*"
   ],
   "np": {
-    "yarn": false,
-    "contents": "./dist"
+    "yarn": false
   }
 }
