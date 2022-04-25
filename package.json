@@ -1,10 +1,10 @@
 {
   "name": "mandler",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A modern command handler for discord.js",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"No tests available\" && exit 0",
+    "test": "echo \"No tests available\"",
     "build": "tsc"
   },
   "repository": {
