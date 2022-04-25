@@ -1,4 +1,2 @@
-import Mandler from "./Mandler";
-
-export default Mandler;
+const Mandler = require("./dist");
 module.exports = Mandler;
