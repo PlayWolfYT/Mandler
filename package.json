@@ -3,6 +3,7 @@
   "version": "0.2.5",
   "description": "A modern command handler for discord.js",
   "main": "dist/Mandler.js",
+  "types": "dist/Mandler.d.ts",
   "scripts": {
     "test": "echo \"No tests available\"",
     "build": "npx rimraf dist/ && tsc",
