@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "resolveJsonModule": true,
+        "target": "esnext",
+        "module": "commonjs",
+        "outDir": "./dist",
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true
+        //"rootDir": "./src",
+    },
+    "include": [
+        "./src/**/*.ts",
+        "./test/**/*.ts"
+    ],
+    "files": [
+        "./src/index.ts",
+        "./typings.d.ts"
+    ]
+}

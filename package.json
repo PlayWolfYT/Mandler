@@ -1,0 +1,46 @@
+{
+  "name": "mandler",
+  "version": "0.1.0",
+  "description": "A modern command handler for discord.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npx tsc -p tsconfig-build.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PlayWolfYT/Mandler.git"
+  },
+  "keywords": [
+    "discord",
+    "discord.js",
+    "command",
+    "handler",
+    "commandhandler",
+    "discord",
+    "bot"
+  ],
+  "author": "PlayWolfYT",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PlayWolfYT/Mandler/issues"
+  },
+  "homepage": "https://github.com/PlayWolfYT/Mandler#readme",
+  "devDependencies": {
+    "dotenv": "^16.0.0",
+    "typescript": "^4.6.3"
+  },
+  "dependencies": {
+    "discord.js": "^13.6.0",
+    "events": "^3.3.0",
+    "mongoose": "^6.3.0"
+  },
+  "files": [
+    "./dist/**/*.js",
+    "./index.js"
+  ],
+  "np": {
+    "yarn": false,
+    "contents": "dist"
+  }
+}
