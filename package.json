@@ -8,7 +8,7 @@
     "build": "tsc",
     "publish": "np",
     "release": "npm run build && npm run commit && npm run publish",
-    "commit": "git add . && git commit -m \"chore(release): v$npm_package_version\" && git push && npm version patch && npm publish"
+    "commit": "git add . && git commit -m \"chore(release): v$npm_package_version\" && git push"
   },
   "repository": {
     "type": "git",
