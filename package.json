@@ -1,6 +1,6 @@
 {
   "name": "mandler",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "A modern command handler for discord.js",
   "main": "dist/Mandler.js",
   "scripts": {
