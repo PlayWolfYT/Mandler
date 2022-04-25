@@ -1,3 +1,4 @@
-import Mandler from './src';
+import Mandler from './dist';
 
 export default Mandler;
+module.exports = Mandler;

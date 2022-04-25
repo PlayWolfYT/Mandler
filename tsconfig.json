@@ -7,15 +7,15 @@
         "strict": true,
         "esModuleInterop": true,
         "skipLibCheck": true,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true,
+        "declaration": true,
         //"rootDir": "./src",
     },
     "include": [
-        "./src/**/*.ts",
-        "./test/**/*.ts"
+        "src"
     ],
-    "files": [
-        "./src/index.ts",
-        "src/typings.d.ts"
+    "exclude": [
+        "**/__tests__/*",
+        "node_modules"
     ]
 }

@@ -1,8 +1,6 @@
 # Utilities
 dist
-test
-*.test.js
-*.test.ts
+**/__test__/*
 
 # Logs
 logs
