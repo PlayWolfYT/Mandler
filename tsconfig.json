@@ -12,7 +12,9 @@
         //"rootDir": "./src",
     },
     "include": [
-        "src"
+        "src",
+        "./package.json",
+        "./README.md"
     ],
     "exclude": [
         "**/__tests__/*",
