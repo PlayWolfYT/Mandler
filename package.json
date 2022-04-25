@@ -5,7 +5,7 @@
   "main": "dist/Mandler.js",
   "scripts": {
     "test": "echo \"No tests available\"",
-    "build": "tsc",
+    "build": "npx rimraf dist/ && tsc",
     "publish": "np",
     "release": "npm run build && npm run commit && npm run publish",
     "commit": "git add . && git commit && git push"
