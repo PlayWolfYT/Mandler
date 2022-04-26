@@ -1,4 +1,6 @@
-import { Client } from 'discord.js';
+import { Client, ClientEvents } from 'discord.js';
+import EventEmitter from "events";
+import Mandler from './Mandler';
 
 // Utilities
 type RequireOnlyOne<T, Keys extends keyof T = keyof T> =
@@ -68,6 +70,9 @@ interface MandlerOptionsInterface {
 }
 
 type MandlerOptions = RequireOnlyOne<MandlerOptionsWithMongoDB, "client" | "token"> | RequireOnlyOne<MandlerOptionsWithMySQL, "client" | "token"> | RequireOnlyOne<MandlerOptionsWithoutDatabase, "client" | "token">;
+interface MandlerClientEvents {
+    mandlerReady: [Mandler];
+}
 
 // TimeString
 {
@@ -83,4 +88,17 @@ type MandlerOptions = RequireOnlyOne<MandlerOptionsWithMongoDB, "client" | "toke
 
     type TimeString = TimeStringMilliSeconds | TimeStringSeconds | TimeStringMinutes | TimeStringHours | TimeStringDays | TimeStringWeeks | TimeStringMonths | TimeStringYears;
 
+}
+
+//   
+
+class Mandler extends EventEmitter {
+    private _client;
+    private _defaultPrefix?;
+    private _connection?;
+    private _guildSettings?;
+    private _cooldowns?;
+    constructor(options: MandlerOptions);
+    private setup;
+    public on<K extends keyof MandlerClientEvents>(event: K, listener: (...args: MandlerClientEvents[K]) => Awaitable<void>): this;
 }

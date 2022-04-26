@@ -1,6 +1,6 @@
-import { Client } from "discord.js";
+import { Awaitable, Client, ClientEvents } from "discord.js";
 import EventEmitter from "events";
-import { MandlerOptions, MandlerOptionsWithMongoDB } from "./typings";
+import { MandlerClientEvents, MandlerOptions, MandlerOptionsWithMongoDB } from "./typings";
 import { Connection } from 'mongoose';
 import mongoose from "mongoose";
 import GuildSettings, { IGuildSettings } from "./models/mongodb/GuildSettings";
@@ -9,17 +9,30 @@ import Cooldowns, { ICooldown } from "./models/mongodb/Cooldowns";
 // TODO: Add all the other options
 // TODO: Implement mysql as a database
 export default class Mandler extends EventEmitter {
+    public readonly _client: Client;
 
-    // undefined should never occur
-    private _client: Client | undefined;
-    private _defaultPrefix?: string;
     private _connection?: Connection;
     private _guildSettings?: IGuildSettings[];
     private _cooldowns?: ICooldown[];
 
+    private _options: MandlerOptions;
 
     constructor(options: MandlerOptions) {
         super();
+        this._options = options;
+
+        // Setup Client
+        if (options.client) {
+            if (!(options.client instanceof Client)) {
+                throw new Error("Client is not an instance of Discord.js Client");
+                return;
+            }
+            this._client = options.client;
+            if (options.showDebug) console.log("Client set");
+        } else {
+            this._client = new Client({ intents: ["GUILDS", "GUILD_INTEGRATIONS"] });
+        }
+
         this.setup(options);
     }
 
@@ -46,14 +59,6 @@ export default class Mandler extends EventEmitter {
             ...userOptions,
         } as MandlerOptions;
 
-        // Setup Client
-        if (options.client) this._client = options.client;
-        else {
-            this._client = new Client({ intents: ["GUILDS", "GUILD_INTEGRATIONS"] });
-            await this._client.login(options.token);
-        }
-
-        this._defaultPrefix = options.defaultPrefix;
 
         switch (options.databaseType) {
             case "mongodb":
@@ -71,12 +76,30 @@ export default class Mandler extends EventEmitter {
                 this._cooldowns = await Cooldowns.find({});
                 break;
             case "none":
-                console.warn("No database type specified, no database will be used.");
-                console.warn("A database is required to use some of Mandlers features.");
-                console.warn("If your database is not supported, please open an issue on GitHub.");
+                if (options.showWarnings) {
+                    console.warn("No database type specified, no database will be used.");
+                    console.warn("A database is required to use some of Mandlers features.");
+                    console.warn("If your database is not supported, please open an issue on GitHub.");
+                }
                 break;
             default:
-                throw new Error(`Invalid database type: ${options.databaseType}`);
+                throw new Error(`Invalid database type: ${options.databaseType}. If you don't want to use a database, use "none" as database type.`);
+        }
+
+        // Setup Client Events
+        this._client.on("ready", () => {
+            if (options.showStartupInfo) console.log("[Mandler] Client ready.");
+            this.emit("mandlerReady");
+        });
+
+        // Log the client in, if it's not already logged in
+        if (!this._client.user?.bot) {
+            try {
+                await this._client.login(options.token);
+            } catch (err) {
+                console.error("[Mandler] Error while logging in:", err);
+            }
+            if (options.showDebug) console.log("[Mandler] Client logged in.");
         }
     }
 }
